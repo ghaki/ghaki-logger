@@ -8,8 +8,7 @@ module Ghaki module Logger
     include Singleton
 
     #---------------------------------------------------------------------
-    DEF_LOGGER_OPTS = {
-    }
+    DEF_LOGGER_OPTS = {}
 
     #---------------------------------------------------------------------
     attr_writer :logger, :logger_opts
@@ -32,18 +31,11 @@ end end # package
 begin
   require 'ghaki/app/engine'
   Ghaki::App::Engine.class_eval do
-    def logger
-      Ghaki::Logger::App.instance.logger
-    end
-    def logger= val
-      Ghaki::Logger::App.instance.logger = val
-    end
-    def logger_opts
-      Ghaki::Logger::App.instance.logger_opts
-    end
-    def logger_opts= val
-      Ghaki::Logger::App.instance.logger_opts = val
-    end
+    def logger      ; Ghaki::Logger::App.instance.logger       end
+    def logger= val ; Ghaki::Logger::App.instance.logger = val end
+
+    def logger_opts      ; Ghaki::Logger::App.instance.logger_opts       end
+    def logger_opts= val ; Ghaki::Logger::App.instance.logger_opts = val end
   end
 rescue LoadError
 end
