@@ -2,7 +2,7 @@
 require 'ghaki/logger/app'
 
 ############################################################################
-module Ghaki module App module EngineTesting
+module Ghaki module Logger module AppEngineTesting
   begin
     require 'ghaki/app/engine'
 
