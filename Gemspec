@@ -14,12 +14,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'ghaki-core', '>= 1.1.1'
 
   s.add_development_dependency 'rspec', '>= 2.4.0'
-  s.add_development_dependency 'flexmock', '>= 0.8.6'
+  s.add_development_dependency 'mocha', '>= 0.9.12'
 
   s.has_rdoc = true
-  s.extra_rdoc_files = ['README']
+  s.extra_rdoc_files = ['README.rdoc']
 
-  s.files = Dir['{lib,bin}/**/*'] + %w{ README LICENSE VERSION }
+  s.files = Dir['{lib,bin}/**/*'] + %w{ README.rdoc LICENSE VERSION }
   s.test_files = Dir['spec/**/*_spec.rb','*spec/**/*_helper.rb']
   s.require_path = 'lib'
 end

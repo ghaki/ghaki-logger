@@ -1,5 +1,5 @@
 ############################################################################
-require 'spec_helper'
+require 'mocha_helper'
 require 'ghaki/logger/base'
 
 ############################################################################
@@ -8,12 +8,10 @@ module Ghaki module Logger module BaseTesting
 
     ########################################################################
     before(:each) do
-      @core_log = flexmock()
-      flexmock( :safe, ::Logger ) do |fm|
-        fm.should_receive(:new).returns(@core_log)
-      end
-      @core_log.should_receive(:level=).once
-      @core_log.should_receive(:datetime_format=).once
+      @core_log = mock()
+      ::Logger.expects(:new).returns(@core_log)
+      @core_log.expects(:level=).once
+      @core_log.expects(:datetime_format=).once
       @real_log = Ghaki::Logger::Base.new
     end
 
@@ -60,7 +58,7 @@ module Ghaki module Logger module BaseTesting
       #---------------------------------------------------------------------
       describe '#level=' do
         it 'should call parent' do
-          @core_log.should_receive(:level=).once
+          @core_log.expects(:level=).with(::Logger::INFO).once
           @real_log.level = ::Logger::INFO
         end
         it 'should reject invalid values' do
