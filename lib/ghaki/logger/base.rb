@@ -2,7 +2,6 @@
 require 'delegate'
 require 'ghaki/logger/const'
 require 'ghaki/logger/core_ext'
-require 'ghaki/logger/deprecated'
 require 'ghaki/logger/liner'
 require 'ghaki/logger/wrapper/major'
 require 'ghaki/logger/wrapper/minor'
@@ -13,7 +12,6 @@ module Ghaki module Logger
 
     ########################################################################
     include Ghaki::Logger::Liner
-    include Ghaki::Logger::Deprecated
 
     ########################################################################
     attr_accessor :major, :minor, :raw_log
