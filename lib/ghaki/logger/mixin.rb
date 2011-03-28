@@ -1,18 +1,14 @@
 ############################################################################
+require 'ghaki/app/mixer'
 require 'ghaki/logger/app'
 
 ############################################################################
 module Ghaki module Logger
+
   module Mixin
-
-    #-----------------------------------------------------------------------
-    attr_writer :logger
-
-    #-----------------------------------------------------------------------
-    def logger
-      @logger || Ghaki::Logger::App.instance.logger
-    end
-
+    extend Ghaki::App::Mixer
+    create_plugin_mixin :logger, Ghaki::Logger::App
   end # helper
+  
 end end # package
 ############################################################################
