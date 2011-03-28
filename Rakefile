@@ -14,7 +14,7 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 Rake::RDocTask.new('rdoc') do |t|
-  t.rdoc_files.include( 'README.rdoc', 'lib/**/*./rb')
+  t.rdoc_files.include( 'README', 'lib/**/*.rb')
   t.main = 'README'
   t.title = 'Ghaki Logger API Documention'
 end
