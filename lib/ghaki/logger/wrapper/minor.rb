@@ -1,27 +1,30 @@
-############################################################################
 require 'ghaki/logger/wrapper/base'
 
-############################################################################
-module Ghaki module Logger
-  module Wrapper
-    class Minor < Base
+module Ghaki   #:nodoc:
+module Logger  #:nodoc:
+module Wrapper #:nodoc:
 
-      #######################################################################
-      def began msg
-        logger.info 'began ' + msg
-      end
+  # Minor mode for info logging.
+  class Minor < Base
 
-      #######################################################################
-      def ended msg
-        logger.info 'ended ' + msg
-      end
+    # Log that the minor process began.
 
-      #######################################################################
-      def step msg
-        logger.info 'step ' + msg
-      end
+    def began msg
+      logger.info 'began ' + msg
+    end
 
-    end # helper
-  end # namespace
-end end # package
-############################################################################
+    # Log that the major process ended.
+
+    def ended msg
+      logger.info 'ended ' + msg
+    end
+
+    # Log the minor process step.
+
+    def step msg
+      logger.info 'step ' + msg
+    end
+
+  end
+
+end end end

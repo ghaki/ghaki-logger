@@ -1,17 +1,28 @@
-############################################################################
 require 'logger'
 
-############################################################################
-module Ghaki module Logger
+module Ghaki  #:nodoc:
+module Logger #:nodoc:
 
-  MAJOR_BOX_CHAR = '#'
-  MINOR_BOX_CHAR = '*'
-
+  # Default log separator line length.
   DEF_BOX_SIZE = 76
+
+  # Default line separator character.
   DEF_BOX_CHAR = '='
 
+  # Default major mode log separator character.
+  MAJOR_BOX_CHAR = '#'
+
+  # Default minor mode log separator character.
+  MINOR_BOX_CHAR = '*'
+
+  # Default date time stamp log formatting.
   DEF_DATETIME_FORMAT = '%Y/%m/%d %H:%M:%S %Z'
+
+  # Default logging level.
   DEF_LEVEL           = ::Logger::INFO
+
+  # Lookup table for logging levels.
+  # - Has strings, symbols, and ::Logger integer values.
 
   SEVERITY_LOOKUP = {
     ::Logger::DEBUG   => ::Logger::DEBUG,
@@ -34,5 +45,4 @@ module Ghaki module Logger
     :unknown  => ::Logger::UNKNOWN,
   }
 
-end end # package
-############################################################################
+end end

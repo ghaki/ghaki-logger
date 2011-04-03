@@ -1,14 +1,26 @@
-############################################################################
-require 'ghaki/app/mixer'
+require 'ghaki/app/mixable'
 require 'ghaki/logger/app'
 
-############################################################################
-module Ghaki module Logger
+module Ghaki  #:nodoc:
+module Logger #:nodoc:
+
+  # Mixin used to add <b>logger</b> to your classes.
+  #
+  # ==== Usage
+  #
+  # class MyClass
+  #   include Ghaki::Logger::Mixin
+  #   def do_something
+  #     logger.step 'did something'
+  #   end
+  # end
+  #
+  # myobj = MyClass.new
+  # myobj.do_something
 
   module Mixin
-    extend Ghaki::App::Mixer
-    create_plugin_mixin :logger, Ghaki::Logger::App
-  end # helper
+    include Ghaki::App::Mixable
+    app_mixin_accessor App, :logger
+  end
   
-end end # package
-############################################################################
+end end

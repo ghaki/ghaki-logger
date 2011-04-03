@@ -1,54 +1,56 @@
-############################################################################
-# BEGAN RUBY CLASS
-############################################################################
 require 'logger'
 require 'forwardable'
 
-############################################################################
-module Ghaki module Logger
-  module CoreExt
-    module Logger
-      extend Forwardable
+module Ghaki   #:nodoc:
+module Logger  #:nodoc:
+module CoreExt #:nodoc:
 
-      #---------------------------------------------------------------------
-      def_delegators :@logdev,
-        :shift_age,  :shift_age=,
-        :shift_size, :shift_size=,
-        :filename
+  # Adds features to the <b>Logger</b> class.
 
-      #---------------------------------------------------------------------
-      def re_stds
-        re_stderr
-        re_stdout
-      end
+  module Logger
+    extend Forwardable
 
-      #---------------------------------------------------------------------
-      def rotate
-        @logdev.rotate
-        self
-      end
+    def_delegators :@logdev,
+      :shift_age,
+      :shift_age=,
+      :shift_size,
+      :shift_size=,
+      :filename
 
-      #---------------------------------------------------------------------
-      def re_open opts={}
-        @logdev.re_open opts
-        self
-      end
+    # Calls <b>LogDevice</b> for log rotation.
 
-      #---------------------------------------------------------------------
-      def re_stderr
-        $stderr.reopen(@logdev.dev)
-        self
-      end
+    def rotate
+      @logdev.rotate
+      self
+    end
 
-      #---------------------------------------------------------------------
-      def re_stdout
-        $stdout.reopen(@logdev.dev)
-        self
-      end
+    # Calls <b>LogDevice</b> for re-opening the log file.
 
-    end # helper
-  end # namespace
-end end # package
-############################################################################
-# ENDED RUBY CLASS
-############################################################################
+    def re_open opts={}
+      @logdev.re_open opts
+      self
+    end
+
+    # Re-opens <b>$stderr</b> with the current log file. 
+
+    def re_stderr
+      $stderr.reopen(@logdev.dev)
+      self
+    end
+
+    # Re-opens <b>$stdout</b> with the current log file.
+
+    def re_stdout
+      $stdout.reopen(@logdev.dev)
+      self
+    end
+
+    # Re-opens standard files with the current log file.
+
+    def re_stds
+      re_stderr
+      re_stdout
+    end
+
+  end
+end end end

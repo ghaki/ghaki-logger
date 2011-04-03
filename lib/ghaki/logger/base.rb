@@ -1,4 +1,3 @@
-############################################################################
 require 'delegate'
 require 'ghaki/logger/const'
 require 'ghaki/logger/core_ext'
@@ -6,17 +5,31 @@ require 'ghaki/logger/liner'
 require 'ghaki/logger/wrapper/major'
 require 'ghaki/logger/wrapper/minor'
 
-############################################################################
-module Ghaki module Logger
-  class Base < DelegateClass(::Logger)
+module Ghaki  #:nodoc:
+module Logger #:nodoc:
 
-    ########################################################################
+  class Base < DelegateClass(::Logger)
     include Ghaki::Logger::Liner
 
-    ########################################################################
-    attr_accessor :major, :minor, :raw_log
+    attr_accessor :major, # helper for major logging info mode
+      :minor, # helper for minor logging info mode
+      :raw_log #:nodoc:
 
-    ########################################################################
+=begin rdoc
+
+== Constructor options:
+
+[+box_char+]        Character used to make line separators in the logs.
+[+box_size+]        Line length used for separators in the logs.
+[+datetime_format+] Date/time format used for logging.
+[+file_handle+]     Open file handle to log to.
+[+file_name+]       Name of file to open for logging.
+[+level+]           Verbosity of logging.
+[+shift_age+]       Shift age for logs, see ::Logger:: for details.
+[+shift_size+]      Shift size for logs, see ::Logger for details.
+
+=end
+
     def initialize opts={}
 
       setup_liner opts
@@ -43,13 +56,13 @@ module Ghaki module Logger
       self.datetime_format = opts[:datetime_format] || DEF_DATETIME_FORMAT
     end
 
-    ########################################################################
+    # Set logging level. Assert on invalid level.
+
     def level= val
       val = SEVERITY_LOOKUP[val]
-      raise ArgumentError, "Invalid log level: #{val.to_s}", caller if val.nil?
+      raise ArgumentError, "Invalid log level: #{val}" if val.nil?
       super( val )
     end
 
-  end # class
-end end # package
-############################################################################
+  end
+end end

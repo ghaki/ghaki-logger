@@ -1,40 +1,51 @@
-############################################################################
 require 'ghaki/logger/wrapper/base'
 
-############################################################################
-module Ghaki module Logger
-  module Wrapper
-      class Major < Base
+module Ghaki   #:nodoc:
+module Logger  #:nodoc:
+module Wrapper #:nodoc:
 
-      ######################################################################
-      attr_accessor :box_char, :box_size
+  # Major mode for info logging.
+  class Major < Base
 
-      ######################################################################
-      def initialize opts={} ; super opts
-        @box_char = opts[:box_char] || MAJOR_BOX_CHAR
-        @box_size = opts[:box_size] || DEF_BOX_SIZE
-      end
+    # Accessors for dealing with the line creation.
 
-      ######################################################################
-      def began msg, box_char=@box_char, box_size=@box_size
-        logger.liner box_char, box_size
-        logger.info 'BEGAN ' + msg
-        logger.liner box_char, box_size
-      end
+    attr_accessor :box_char, # Character used to make line separators in the logs.
+      :box_size # Line length used for separators in the logs.
 
-      ######################################################################
-      def ended msg, box_char=@box_char, box_size=@box_size
-        logger.liner box_char, box_size
-        logger.info 'ENDED ' + msg
-        logger.liner box_char, box_size
-      end
+=begin rdoc
 
-      ######################################################################
-      def step msg
-        logger.info 'STEP ' + msg
-      end
+== Constructor options:
 
-    end # helper
-  end # namespace
-end end # package
-############################################################################
+  [+box_char+]  Character used to make line separators in the logs.
+  [+box_size+]  Line length used for separators in the logs.
+
+=end
+    def initialize opts={} ; super opts
+      @box_char = opts[:box_char] || MAJOR_BOX_CHAR
+      @box_size = opts[:box_size] || DEF_BOX_SIZE
+    end
+
+    # Log that the major process began.
+
+    def began msg, box_char=@box_char, box_size=@box_size
+      logger.liner box_char, box_size
+      logger.info 'BEGAN ' + msg
+      logger.liner box_char, box_size
+    end
+
+    # Log that the major process ended.
+
+    def ended msg, box_char=@box_char, box_size=@box_size
+      logger.liner box_char, box_size
+      logger.info 'ENDED ' + msg
+      logger.liner box_char, box_size
+    end
+
+    # Log the major proecss step.
+
+    def step msg
+      logger.info 'STEP ' + msg
+    end
+
+  end
+end end end
