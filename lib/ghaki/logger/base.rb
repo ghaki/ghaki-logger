@@ -11,9 +11,9 @@ module Logger #:nodoc:
   class Base < DelegateClass(::Logger)
     include Ghaki::Logger::Liner
 
-    attr_accessor :major, # helper for major logging info mode
-      :minor, # helper for minor logging info mode
-      :raw_log #:nodoc:
+    attr_accessor \
+      :major, # helper for major logging info mode
+      :minor  # helper for minor logging info mode
 
 =begin rdoc
 
@@ -36,8 +36,8 @@ module Logger #:nodoc:
 
       @major = Ghaki::Logger::Wrapper::Major.new({
         :logger   => self,
-        :box_char => opts[:major_char],
-        :box_size => opts[:major_size],
+        :box_char => opts[:box_char],
+        :box_size => opts[:box_size],
       })
 
       @minor = Ghaki::Logger::Wrapper::Minor.new({
@@ -62,6 +62,20 @@ module Logger #:nodoc:
       val = SEVERITY_LOOKUP[val]
       raise ArgumentError, "Invalid log level: #{val}" if val.nil?
       super( val )
+    end
+
+    def dup
+      other = Ghaki::Logger::Base.new({
+        :file_handle     => @logdev,
+        :level           => self.level,
+        :datetime_format => self.datetime_format,
+        :shift_age       => self.shift_age,
+        :shift_size      => self.shift_size,
+        :major_char      => self.box_char,
+        :major_size      => self.box_size,
+      })
+      other.filename = self.filename unless self.filename.nil?
+      other
     end
 
   end
