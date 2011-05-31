@@ -10,6 +10,8 @@ module CoreExt #:nodoc:
   module Logger
     extend Forwardable
 
+    attr_accessor :logdev
+
     def_delegators :@logdev,
       :shift_age,
       :shift_age=,
@@ -34,22 +36,22 @@ module CoreExt #:nodoc:
     # Re-opens <b>$stderr</b> with the current log file. 
 
     def re_stderr
-      $stderr.reopen(@logdev.dev)
+      @logdev.re_stderr
       self
     end
 
     # Re-opens <b>$stdout</b> with the current log file.
 
     def re_stdout
-      $stdout.reopen(@logdev.dev)
+      @logdev.re_stdout
       self
     end
 
     # Re-opens standard files with the current log file.
 
     def re_stds
-      re_stderr
-      re_stdout
+      @logdev.re_stds
+      self
     end
 
   end

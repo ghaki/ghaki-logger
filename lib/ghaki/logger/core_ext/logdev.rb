@@ -48,6 +48,25 @@ module CoreExt #:nodoc:
       end
     end
 
+    def re_stds
+      @mutex.synchronize do
+        $stderr.reopen(@dev)
+        $stdout.reopen(@dev)
+      end
+    end
+
+    def re_stderr
+      @mutex.synchronize do
+        $stderr.reopen(@dev)
+      end
+    end
+
+    def re_stdout
+      @mutex.synchronize do
+        $stdout.reopen(@dev)
+      end
+    end
+
     protected
 
     def _open_and_assign log, opts #:nodoc:

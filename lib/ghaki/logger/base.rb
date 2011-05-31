@@ -44,11 +44,16 @@ module Logger #:nodoc:
         :logger => self,
       })
 
-      @raw_log = ::Logger.new( *( [
-               opts[:file_handle] || opts[:file_name] || $stderr,
-               opts[:shift_age],
-               opts[:shift_size]
-                ].compact) )
+      if opts[:log_device].nil?
+        @raw_log = ::Logger.new( *([
+          opts[:file_handle] || opts[:file_name] || $stderr,
+          opts[:shift_age],
+          opts[:shift_size]
+        ].compact))
+      else
+        @raw_log = ::Logger.new(nil)
+        @raw_log.logdev = opts[:log_device]
+      end
 
       super( @raw_log )
 
@@ -66,13 +71,13 @@ module Logger #:nodoc:
 
     def dup
       other = Ghaki::Logger::Base.new({
-        :file_handle     => @logdev,
+        :log_device      => @raw_log.logdev,
         :level           => self.level,
         :datetime_format => self.datetime_format,
         :shift_age       => self.shift_age,
         :shift_size      => self.shift_size,
-        :major_char      => self.box_char,
-        :major_size      => self.box_size,
+        :box_char        => self.box_char,
+        :box_size        => self.box_size,
       })
       other.filename = self.filename unless self.filename.nil?
       other
