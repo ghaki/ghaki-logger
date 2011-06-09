@@ -70,7 +70,7 @@ module Logger #:nodoc:
     end
 
     def dup
-      other = Ghaki::Logger::Base.new({
+      Ghaki::Logger::Base.new({
         :log_device      => @raw_log.logdev,
         :level           => self.level,
         :datetime_format => self.datetime_format,
@@ -79,8 +79,6 @@ module Logger #:nodoc:
         :box_char        => self.box_char,
         :box_size        => self.box_size,
       })
-      other.filename = self.filename unless self.filename.nil?
-      other
     end
 
   end

@@ -22,6 +22,7 @@ describe Ghaki::Logger::Base do
         level rotate
         shift_age shift_age= shift_size shift_size=
         re_open re_stds re_stderr re_stdout
+        filename
       }.each do |name|
         it { should respond_to name.to_sym }
       end
@@ -40,7 +41,6 @@ describe Ghaki::Logger::Base do
   end
 
   context 'object methods' do
-
 
     describe '#initialize' do
       it 'accepts option :level' do
