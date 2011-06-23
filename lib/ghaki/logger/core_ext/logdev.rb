@@ -9,9 +9,12 @@ module CoreExt #:nodoc:
   module LogDevice
 
     attr_reader \
-      :filename,     # Exposes getter for <b>filename</b>.
+      :filename,     # Exposes getter for <b>@filename</b>.
       :shift_age,    # Exposes getter for <b>shift_age</b>.
       :shift_size    # Exposes getter for <b>shift_size</b>.
+
+    # Allows synonym for :file_name
+    alias_method :file_name, :filename
 
     # Exposes setter for <b>shift_age</b>.
 
