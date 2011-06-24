@@ -1,7 +1,7 @@
-############################################################################
 require 'ghaki/app/engine'
 require 'ghaki/logger/app'
 
+module Ghaki module App module Engine_Testing
 describe Ghaki::App::Engine do
 
   before(:all) do
@@ -40,3 +40,4 @@ describe Ghaki::App::Engine do
   end
 
 end
+end end end

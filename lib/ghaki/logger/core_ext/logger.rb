@@ -19,6 +19,11 @@ module CoreExt #:nodoc:
       :shift_size=,
       :filename
 
+    # Calls <b>LogDevice</b> for accessing the file handle.
+    def with_file &block
+      @logdev.with_file( &block )
+    end
+
     # Calls <b>LogDevice</b> for log rotation.
 
     def rotate

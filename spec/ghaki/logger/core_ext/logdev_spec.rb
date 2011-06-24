@@ -15,6 +15,7 @@ module Ghaki module Logger module CoreExt module LogDeviceTesting
       it { should respond_to :re_open }
       it { should respond_to :filename  }
       it { should respond_to :file_name  }
+      it { should respond_to :with_file }
     end
 
   end

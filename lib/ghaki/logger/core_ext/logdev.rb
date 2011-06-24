@@ -16,6 +16,13 @@ module CoreExt #:nodoc:
     # Allows synonym for :file_name
     alias_method :file_name, :filename
 
+    # Allow mutex wrapped file handle access.
+    def with_file &block
+      @mutex.synchronize do
+        block.call( @dev )
+      end
+    end
+
     # Exposes setter for <b>shift_age</b>.
 
     def shift_age= n

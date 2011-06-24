@@ -1,9 +1,8 @@
-############################################################################
-require 'mocha_helper'
 require 'ghaki/logger/base'
 
-############################################################################
-module Ghaki module Logger module BaseTesting
+require File.join(File.dirname(__FILE__),'../..','mocha_helper')
+
+module Ghaki module Logger module Base_Testing
 describe Ghaki::Logger::Base do
 
   before(:each) do
