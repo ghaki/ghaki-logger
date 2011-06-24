@@ -9,7 +9,7 @@ module SpecHelper #:nodoc:
   end
 
   def setup_safe_logger opts={}
-    @logger = make_safe_logger(klass,opts)
+    @logger = make_safe_logger(opts)
   end
 
 end end end
