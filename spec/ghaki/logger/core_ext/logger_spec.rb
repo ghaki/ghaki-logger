@@ -18,6 +18,7 @@ module Ghaki module Logger module CoreExt module LoggerTesting
       it { should respond_to :re_stderr }
       it { should respond_to :re_stdout }
       it { should respond_to :with_file }
+      it { should respond_to :bounce }
     end
 
   end

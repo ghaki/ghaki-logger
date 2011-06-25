@@ -16,6 +16,7 @@ module Ghaki module Logger module CoreExt module LogDeviceTesting
       it { should respond_to :filename  }
       it { should respond_to :file_name  }
       it { should respond_to :with_file }
+      it { should respond_to :bounce }
     end
 
   end

@@ -17,43 +17,40 @@ module CoreExt #:nodoc:
       :shift_age=,
       :shift_size,
       :shift_size=,
-      :filename
-
-    # Calls <b>LogDevice</b> for accessing the file handle.
-    def with_file &block
-      @logdev.with_file( &block )
-    end
+      :filename,
+      :with_file
 
     # Calls <b>LogDevice</b> for log rotation.
-
     def rotate
       @logdev.rotate
       self
     end
 
-    # Calls <b>LogDevice</b> for re-opening the log file.
+    # Calls <b>LogDevice</b> for bouncing the log file.
+    def bounce
+      @logdev.bounce
+      self
+    end
 
+    # Calls <b>LogDevice</b> for re-opening the log file.
     def re_open opts={}
       @logdev.re_open opts
       self
     end
 
     # Re-opens <b>$stderr</b> with the current log file. 
-
     def re_stderr
       @logdev.re_stderr
       self
     end
 
     # Re-opens <b>$stdout</b> with the current log file.
-
     def re_stdout
       @logdev.re_stdout
       self
     end
 
     # Re-opens standard files with the current log file.
-
     def re_stds
       @logdev.re_stds
       self

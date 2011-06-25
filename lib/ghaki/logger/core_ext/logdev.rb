@@ -45,6 +45,15 @@ module CoreExt #:nodoc:
       end
     end
 
+    def bounce
+      @mutex.synchronize do
+        @dev.flush
+        @dev.close
+        @dev = open_logfile(@filename)
+        @dev.sync = true
+      end
+    end
+
     # Reopen the logger using the new opts.
 
     def re_open opts={}
