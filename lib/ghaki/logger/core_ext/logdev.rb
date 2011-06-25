@@ -46,11 +46,13 @@ module CoreExt #:nodoc:
     end
 
     def bounce
-      @mutex.synchronize do
-        @dev.flush
-        @dev.close
-        @dev = open_logfile(@filename)
-        @dev.sync = true
+      unless @filename.nil?
+        @mutex.synchronize do
+          @dev.flush
+          @dev.close
+          @dev = open_logfile(@filename)
+          @dev.sync = true
+        end
       end
     end
 
