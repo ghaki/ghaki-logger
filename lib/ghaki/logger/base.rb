@@ -1,4 +1,5 @@
-require 'delegate'
+require 'forwardable'
+
 require 'ghaki/logger/const'
 require 'ghaki/logger/core_ext'
 require 'ghaki/logger/liner'
@@ -8,7 +9,7 @@ require 'ghaki/logger/wrapper/minor'
 module Ghaki  #:nodoc:
 module Logger #:nodoc:
 
-  class Base < DelegateClass(::Logger)
+  class Base < ::Logger
     include Ghaki::Logger::Liner
 
     attr_accessor \
@@ -45,19 +46,17 @@ module Logger #:nodoc:
       })
 
       if opts[:log_device].nil?
-        @raw_log = ::Logger.new( *([
+        super( *([
           opts[:file_handle] || opts[:file_name] || $stderr,
           opts[:shift_age],
           opts[:shift_size]
-        ].compact))
+        ].compact) )
       else
-        @raw_log = ::Logger.new(nil)
-        @raw_log.logdev = opts[:log_device]
+        super(nil)
+        self.logdev = opts[:log_device]
       end
 
-      super( @raw_log )
-
-      self.level           = opts[:level] || DEF_LEVEL
+      self.level = opts[:level] || DEF_LEVEL
       self.datetime_format = opts[:datetime_format] || DEF_DATETIME_FORMAT
     end
 
@@ -66,12 +65,14 @@ module Logger #:nodoc:
     def level= val
       val = SEVERITY_LOOKUP[val]
       raise ArgumentError, "Invalid log level: #{val}" if val.nil?
-      super( val )
+      super(val)
     end
+
+    # Create similar logger that uses the same log device.
 
     def dup
       Ghaki::Logger::Base.new({
-        :log_device      => @raw_log.logdev,
+        :log_device      => self.logdev,
         :level           => self.level,
         :datetime_format => self.datetime_format,
         :shift_age       => self.shift_age,
