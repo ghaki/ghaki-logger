@@ -37,5 +37,14 @@ describe SpecHelper do
     end
   end
 
+  describe '#reset_safe_logger' do
+    it 'creates new logger' do
+      setup_safe_logger
+      x = @logger
+      reset_safe_logger
+      x.should_not equal(@logger)
+    end
+  end
+
 end
 end end end

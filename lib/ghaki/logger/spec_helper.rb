@@ -16,4 +16,9 @@ module SpecHelper #:nodoc:
     @logger = nil
   end
 
+  def reset_safe_logger opts={}
+    clear_safe_logger
+    setup_safe_logger opts
+  end
+
 end end end
