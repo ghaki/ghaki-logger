@@ -1,7 +1,5 @@
 require 'ghaki/logger/spec_helper'
 
-require File.join(File.dirname(__FILE__),'../..','mocha_helper')
-
 module Ghaki module Logger module SpecHelper_Testing
 describe SpecHelper do
   include SpecHelper

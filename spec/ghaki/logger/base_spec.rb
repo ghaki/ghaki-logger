@@ -1,7 +1,5 @@
 require 'ghaki/logger/base'
 
-require File.join(File.dirname(__FILE__),'../..','mocha_helper')
-
 module Ghaki module Logger module Base_Testing
 describe Ghaki::Logger::Base do
 

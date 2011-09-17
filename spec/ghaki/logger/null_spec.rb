@@ -1,8 +1,6 @@
 require 'ghaki/logger/core_ext'
 require 'ghaki/logger/null'
 
-require File.join(File.dirname(__FILE__),'../..','mocha_helper')
-
 module Ghaki module Logger module Null_Testing
 describe Null do
 
