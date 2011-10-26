@@ -33,7 +33,7 @@ module Logger #:nodoc:
       self.liner box_char, box_size
       [msgs].flatten.each do |text|
         text.each_line do |line|
-          self.<< '# ' + box_char + ' ' + line + "\n"
+          self.<< '# ' + box_char + ' ' + line.chomp + "\n"
         end
       end
       self.liner box_char, box_size
@@ -44,7 +44,7 @@ module Logger #:nodoc:
     def puts msgs
       [msgs].flatten.each do |text|
         text.each_line do |line|
-          self.<< '# ' + line + "\n"
+          self.<< '# ' + line.chomp + "\n"
         end
       end
     end
