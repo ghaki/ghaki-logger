@@ -5,56 +5,56 @@ module Ghaki   #:nodoc:
 module Logger  #:nodoc:
 module CoreExt #:nodoc:
 
-  # Adds features to the <b>Logger</b> class.
+# Adds features to the <b>Logger</b> class.
 
-  module Logger
-    extend Forwardable
+module Logger
+  extend Forwardable
 
-    attr_accessor :logdev
+  attr_accessor :logdev
 
-    def_delegators :@logdev,
-      :shift_age,
-      :shift_age=,
-      :shift_size,
-      :shift_size=,
-      :filename,
-      :with_file
+  def_delegators :@logdev,
+    :shift_age,
+    :shift_age=,
+    :shift_size,
+    :shift_size=,
+    :filename,
+    :with_file
 
-    # Calls <b>LogDevice</b> for log rotation.
-    def rotate
-      @logdev.rotate
-      self
-    end
-
-    # Calls <b>LogDevice</b> for bouncing the log file.
-    def bounce
-      @logdev.bounce
-      self
-    end
-
-    # Calls <b>LogDevice</b> for re-opening the log file.
-    def re_open opts={}
-      @logdev.re_open opts
-      self
-    end
-
-    # Re-opens <b>$stderr</b> with the current log file. 
-    def re_stderr
-      @logdev.re_stderr
-      self
-    end
-
-    # Re-opens <b>$stdout</b> with the current log file.
-    def re_stdout
-      @logdev.re_stdout
-      self
-    end
-
-    # Re-opens standard files with the current log file.
-    def re_stds
-      @logdev.re_stds
-      self
-    end
-
+  # Calls <b>LogDevice</b> for log rotation.
+  def rotate
+    @logdev.rotate
+    self
   end
+
+  # Calls <b>LogDevice</b> for bouncing the log file.
+  def bounce
+    @logdev.bounce
+    self
+  end
+
+  # Calls <b>LogDevice</b> for re-opening the log file.
+  def re_open opts={}
+    @logdev.re_open opts
+    self
+  end
+
+  # Re-opens <b>$stderr</b> with the current log file. 
+  def re_stderr
+    @logdev.re_stderr
+    self
+  end
+
+  # Re-opens <b>$stdout</b> with the current log file.
+  def re_stdout
+    @logdev.re_stdout
+    self
+  end
+
+  # Re-opens standard files with the current log file.
+  def re_stds
+    @logdev.re_stds
+    self
+  end
+
+end
 end end end
