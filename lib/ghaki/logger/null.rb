@@ -1,14 +1,17 @@
-require 'ghaki/logger/base'
 require 'stringio'
+
+require 'ghaki/attr/boolean'
+require 'ghaki/logger/base'
 
 module Ghaki  #:nodoc:
 module Logger #:nodoc:
 
+# Helper for writing logs to nowhere during testing.
 class Null < Base
+  include Ghaki::Attr::Boolean
 
-  attr_accessor :allow_redirection
-  alias_method :allow_redirection?, :allow_redirection
-  
+  bool_accessor :allow_redirection
+
 =begin rdoc
 
 == Constructor options:
@@ -19,7 +22,8 @@ class Null < Base
 
   def initialize _opts={}
     opts = _opts.dup
-    @allow_redirection = opts.delete(:allow_redirection)
+    bool_option opts, false, :allow_redirection
+    opts.delete(:allow_redirection)
     opts.delete(:log_device)
     opts.delete(:file_handle)
     opts[:file_handle] = StringIO.new
@@ -35,17 +39,17 @@ class Null < Base
 
   # Reassign STDOUT and STDERR but only if redirection is allowed.
   def re_stds
-    super if @allow_redirection
+    super if allow_redirection?
   end
 
   # Reassign STDERR but only if redirection is allowed.
   def re_stderr
-    super if @allow_redirection
+    super if allow_redirection?
   end
 
   # Reassign STDOUT but only if redirection is allowed.
   def re_stdout
-    super if @allow_redirection
+    super if allow_redirection?
   end
 
 end

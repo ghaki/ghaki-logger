@@ -40,8 +40,7 @@ describe Null do
     end
   end
 
-  it { should respond_to :allow_redirection }
-  it { should respond_to :allow_redirection= }
+  it { should respond_to :allow_redirection! }
   it { should respond_to :allow_redirection? }
 
   it { should respond_to :file_name }
@@ -54,14 +53,14 @@ describe Null do
   describe '#re_stds' do
     context 'when allowing redirection' do
       it 'passes calls to log device' do
-        subject.allow_redirection = true
+        subject.allow_redirection! true
         @log_dev.expects(:re_stds).once
         subject.re_stds
       end
     end
     context 'when disallowing redirection' do
       it 'blocks calls to log device' do
-        subject.allow_redirection = false
+        subject.allow_redirection! false
         @log_dev.expects(:re_stds).never
         subject.re_stds
       end
@@ -71,14 +70,14 @@ describe Null do
   describe '#re_stdout' do
     context 'when allowing redirection' do
       it 'passes calls to log device' do
-        subject.allow_redirection = true
+        subject.allow_redirection! true
         @log_dev.expects(:re_stdout).once
         subject.re_stdout
       end
     end
     context 'when disallowing redirection' do
       it 'blocks calls to log device' do
-        subject.allow_redirection = false
+        subject.allow_redirection! false
         @log_dev.expects(:re_stdout).never
         subject.re_stdout
       end
@@ -88,14 +87,14 @@ describe Null do
   describe '#re_stderr' do
     context 'when allowing redirection' do
       it 'passes calls to log device' do
-        subject.allow_redirection = true
+        subject.allow_redirection! true
         @log_dev.expects(:re_stderr).once
         subject.re_stderr
       end
     end
     context 'when disallowing redirection' do
       it 'blocks calls to log device' do
-        subject.allow_redirection = false
+        subject.allow_redirection! false
         @log_dev.expects(:re_stderr).never
         subject.re_stderr
       end
