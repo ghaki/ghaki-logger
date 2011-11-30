@@ -1,6 +1,7 @@
 require 'stringio'
 
-require 'ghaki/attr/boolean'
+require 'ghaki/bool/accessors'
+require 'ghaki/bool/options'
 require 'ghaki/logger/base'
 
 module Ghaki  #:nodoc:
@@ -8,7 +9,8 @@ module Logger #:nodoc:
 
 # Helper for writing logs to nowhere during testing.
 class Null < Base
-  include Ghaki::Attr::Boolean
+  extend  Ghaki::Bool::Accessors
+  include Ghaki::Bool::Options
 
   bool_accessor :allow_redirection
 
